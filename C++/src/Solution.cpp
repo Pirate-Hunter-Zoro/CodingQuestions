@@ -500,7 +500,6 @@ int Solution::unhappyFriends(int n, vector<vector<int> > &preferences, vector<ve
     unordered_set<int> unhappy;
 
     // now solve the problem
-    int numUnhappy = 0;
     for (vector<int> pair : pairs)
     {
         int friend1 = pair.at(0);
@@ -509,9 +508,18 @@ int Solution::unhappyFriends(int n, vector<vector<int> > &preferences, vector<ve
         // ask the first and second friend for their preferences (who will in turn be asked)
         for (int otherFriend = 0; otherFriend < n; otherFriend++)
         {
-            if (otherFriend != pair.at(0) && otherFriend != pair.at(1))
+            if ((otherFriend != friend1) && (otherFriend != friend2))
             {
-                if (preferencesDictionary[otherFriend][friend1] > preferencesDictionary[otherFriend][pairings[otherFriend]] && preferencesDictionary[friend1][otherFriend] > preferencesDictionary[friend1][friend2])
+                // get values we need to check for unstable matching
+                int otherFriendMatch = pairings[otherFriend];
+                int otherFriendMatchPreferenceLevel = preferencesDictionary[otherFriend][otherFriendMatch];
+                int otherFriendThisFriendPreferenceLevel = preferencesDictionary[otherFriend][friend1];
+
+                // more values to check for unstable matching
+                int thisFriendCurrentMatchPreferenceLevel = preferencesDictionary[friend1][friend2];
+                int thisFriendOtherMatchPreferenceLevel = preferencesDictionary[friend1][otherFriend];
+
+                if ((otherFriendThisFriendPreferenceLevel < otherFriendMatchPreferenceLevel) && (thisFriendOtherMatchPreferenceLevel < thisFriendCurrentMatchPreferenceLevel))
                 {
                     unhappy.insert(friend1);
                     break;
@@ -524,7 +532,16 @@ int Solution::unhappyFriends(int n, vector<vector<int> > &preferences, vector<ve
         {
             if (otherFriend != pair.at(0) && otherFriend != pair.at(1))
             {
-                if (preferencesDictionary[otherFriend][friend2] > preferencesDictionary[otherFriend][pairings[otherFriend]] && preferencesDictionary[friend2][otherFriend] > preferencesDictionary[friend2][friend1])
+                // get values we need to check for unstable matching
+                int otherFriendMatch = pairings[otherFriend];
+                int otherFriendMatchPreferenceLevel = preferencesDictionary[otherFriend][otherFriendMatch];
+                int otherFriendThisFriendPreferenceLevel = preferencesDictionary[otherFriend][friend2];
+
+                // more values to check for unstable matching
+                int thisFriendCurrentMatchPreferenceLevel = preferencesDictionary[friend2][friend1];
+                int thisFriendOtherMatchPreferenceLevel = preferencesDictionary[friend2][otherFriend];
+
+                if ((otherFriendThisFriendPreferenceLevel < otherFriendMatchPreferenceLevel) && (thisFriendOtherMatchPreferenceLevel < thisFriendCurrentMatchPreferenceLevel))
                 {
                     unhappy.insert(friend2);
                     break;

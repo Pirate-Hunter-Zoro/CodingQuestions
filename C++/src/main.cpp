@@ -36,5 +36,18 @@ int main() {
     };
     cout << solution.minimumTotal(triangle) << endl << endl; // 11
 
-    return 0;
+    vector<vector<int> > preferences {
+        { 1, 2, 3 }, 
+        { 3, 2, 0 }, 
+        { 3, 1, 0 }, 
+        { 1, 2, 0 }
+    };
+    vector<vector<int> > matches {
+        { 0, 1 },
+        { 2, 3 }
+    };
+    int n = 4;
+    cout << solution.unhappyFriends(n, preferences, matches) << endl << endl; // 2
+
+        return 0;
 }
