@@ -472,10 +472,66 @@ int Solution::maxProfit(vector<int> &prices)
  * @param pairs
  * @return int
  */
-int Solution::unhappyFriends(int n, vector<vector<int> > &preferences, vector<vector<int> > &pairs){
+int Solution::unhappyFriends(int n, vector<vector<int> > &preferences, vector<vector<int> > &pairs)
+{
+
+    // set up for instant access
+    unordered_map<int, unordered_map<int, int> > preferencesDictionary;
+    for (int i = 0; i < n; i++)
+    {
+        unordered_map<int, int> thisFriendsPreference;
+        for (int j = 0; j < n - 1; j++)
+        {
+            thisFriendsPreference.insert({preferences.at(i).at(j), j});
+        }
+        preferencesDictionary.insert({i, thisFriendsPreference});
+    }
+
+    // we also want instant access for who is paired with whom
+    unordered_map<int, int> pairings;
+    for (vector<int> pair : pairs)
+    {
+        // ask for preferences
+        pairings.insert({pair.at(0), pair.at(1)});
+        pairings.insert({pair.at(1), pair.at(0)});
+    }
+
+    // store everyone who is unhappy in a set
+    unordered_set<int> unhappy;
+
+    // now solve the problem
     int numUnhappy = 0;
+    for (vector<int> pair : pairs)
+    {
+        int friend1 = pair.at(0);
+        int friend2 = pair.at(1);
 
+        // ask the first and second friend for their preferences (who will in turn be asked)
+        for (int otherFriend = 0; otherFriend < n; otherFriend++)
+        {
+            if (otherFriend != pair.at(0) && otherFriend != pair.at(1))
+            {
+                if (preferencesDictionary[otherFriend][friend1] > preferencesDictionary[otherFriend][pairings[otherFriend]] && preferencesDictionary[friend1][otherFriend] > preferencesDictionary[friend1][friend2])
+                {
+                    unhappy.insert(friend1);
+                    break;
+                }
+            }
+        }
 
+        // similarly
+        for (int otherFriend = 0; otherFriend < n; otherFriend++)
+        {
+            if (otherFriend != pair.at(0) && otherFriend != pair.at(1))
+            {
+                if (preferencesDictionary[otherFriend][friend2] > preferencesDictionary[otherFriend][pairings[otherFriend]] && preferencesDictionary[friend2][otherFriend] > preferencesDictionary[friend2][friend1])
+                {
+                    unhappy.insert(friend2);
+                    break;
+                }
+            }
+        }
+    }
 
-    return numUnhappy;
+    return unhappy.size();
 }
