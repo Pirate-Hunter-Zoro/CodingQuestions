@@ -58,6 +58,10 @@ public:
     // construct a binary tree from preorder (self, left, right) and inorder (left, self, right) traversal
     TreeNode* buildTree(std::vector<int> &preorder, std::vector<int> &inorder);
     TreeNode* buildTreeByIndex(std::vector<int> &preorder, int preorderStart, int preorderEnd, std::vector<int> &inorder, int inorderStart, int inorderEnd);
+
+    // coin change problem
+    // https://leetcode.com/problems/coin-change/
+    int coinChange(std::vector<int> &coins, int amount);
 };
 
 #endif
