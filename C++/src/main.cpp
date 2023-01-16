@@ -49,5 +49,9 @@ int main() {
     int n = 4;
     cout << solution.unhappyFriends(n, preferences, matches) << endl << endl; // 2
 
-        return 0;
+    vector<int> preorder {1,2};
+    vector<int> inorder {1,2};
+    solution.buildTree(preorder, inorder);
+
+    return 0;
 }

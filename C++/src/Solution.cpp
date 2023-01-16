@@ -552,3 +552,67 @@ int Solution::unhappyFriends(int n, vector<vector<int> > &preferences, vector<ve
 
     return unhappy.size();
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * @brief Method to construct a binary tree from both preorder and inorder traversal
+ * 
+ * @param preorder 
+ * @param inorder 
+ * @return TreeNode* 
+ */
+TreeNode* Solution::buildTree(vector<int> &preorder, vector<int>& inorder) {
+    return this->buildTreeByIndex(preorder, 0, preorder.size(), inorder, 0, inorder.size());
+}
+
+/**
+ * @brief Helper method to build a binary tree from preorder and inorder listings for said tree
+ * 
+ * @param preorder 
+ * @param preorderStart 
+ * @param preorderEnd (non-inclusive)
+ * @param inorder 
+ * @param inorderStart 
+ * @param inorderEnd (non-inclusive)
+ * @return TreeNode* 
+ */
+TreeNode* Solution::buildTreeByIndex(vector<int> &preorder, int preorderStart, int preorderEnd, vector<int> &inorder, int inorderStart, int inorderEnd) {
+    if (preorderStart >= preorder.size() || preorderStart == preorderEnd){
+        return nullptr;
+    }
+    
+    TreeNode* root = new TreeNode(preorder.at(preorderStart));
+    // are we done?
+    if (preorderEnd == preorderStart+1){
+        // base case
+        return root;
+    } else {
+        // nope, not done
+        int inorderSplit=0;
+        for (int i=inorderStart; i<inorderEnd; i++){
+            if (inorder.at(i) == preorder.at(preorderStart)){
+                inorderSplit = i;
+                break;
+            }
+        }
+
+        // handle the left subtree
+        int leftPreorderStart = preorderStart+1;
+        int leftPreorderEnd = leftPreorderStart + (inorderSplit-inorderStart);
+        int leftInorderStart = inorderStart;
+        int leftInorderEnd = inorderSplit;
+        root->left = this->buildTreeByIndex(preorder, leftPreorderStart, leftPreorderEnd, inorder, leftInorderStart, leftInorderEnd);
+        
+        // handle the right subtree
+        int rightPreorderStart = leftPreorderEnd;
+        int rightPreorderEnd = preorderEnd;
+        int rightInorderStart = inorderSplit+1;
+        int rightInorderEnd = inorderEnd;
+        root->right = this->buildTreeByIndex(preorder, rightPreorderStart, rightPreorderEnd, inorder, rightInorderStart, rightInorderEnd);
+        
+        // now root is complete
+        return root;
+    }
+}

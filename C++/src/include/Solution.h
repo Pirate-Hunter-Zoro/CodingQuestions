@@ -54,6 +54,10 @@ public:
     // unhappy friends - related to stable matching problem
     // https://leetcode.com/problems/count-unhappy-friends/
     int unhappyFriends(int n, std::vector<std::vector<int> > &preferences, std::vector<std::vector<int> > &pairs);
+
+    // construct a binary tree from preorder (self, left, right) and inorder (left, self, right) traversal
+    TreeNode* buildTree(std::vector<int> &preorder, std::vector<int> &inorder);
+    TreeNode* buildTreeByIndex(std::vector<int> &preorder, int preorderStart, int preorderEnd, std::vector<int> &inorder, int inorderStart, int inorderEnd);
 };
 
 #endif
