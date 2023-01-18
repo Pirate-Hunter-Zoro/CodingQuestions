@@ -81,4 +81,24 @@ public class Solution {
         return numWays[n][c.size()-1];
     }
 
+    /*
+     * Complete the 'substringDiff' function below. It should return an
+     * integer that represents the length of the longest common substring as
+     * defined.
+     * link: https://www.hackerrank.com/challenges/substring-diff/problem
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     * 1. INTEGER k
+     * 2. STRING s1
+     * 3. STRING s2
+     */
+
+    public static int substringDiff(int k, String s1, String s2) {
+        // Write your code here
+        int l = 0;
+
+        return l;
+    }
+
 }
