@@ -5,50 +5,46 @@ public class Solution {
 
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) {
-        try {
+    public static void main(String[] args) throws Exception {
+        // for Hackathon:
+        // String[] nm = reader.readLine()
+        //         .trim()
+        //         .split(" ");
+        // int n = Integer.parseInt(nm[0]);
+        // int m = Integer.parseInt(nm[1]);
+        // int[] coins = Arrays.stream(
+        //     reader.readLine()
+        //         .trim()
+        //         .split(" ")
+        //     )
+        //     .mapToInt(Integer::parseInt)
+        //     .toArray();
 
-            // String[] nm = reader.readLine()
-            //     .trim()
-            //     .split(" ");
-            // int n = Integer.parseInt(nm[0]);
-            // int m = Integer.parseInt(nm[1]);
-            // int[] coins = Arrays.stream(
-            //     reader.readLine()
-            //         .trim()
-            //         .split(" ")
-            //     )
-            //     .mapToInt(Integer::parseInt)
-            //     .toArray();
+        // System.out.printf(
+        //     "%d\n",
+        //     Solution.solve(n, m, coins)
+        // );
 
-            // System.out.printf(
-            //     "%d\n",
-            //     Solution.solve(n, m, coins)
-            // );
+        // Coin change problem
+        ArrayList<Long> coinsList = new ArrayList<>();
+        coinsList.add((long)2);
+        coinsList.add((long)5);
+        coinsList.add((long)3);
+        coinsList.add((long)6);
+        System.out.println(getWays(10, coinsList));
 
-            // // Coin change problem
-            // ArrayList<Long> coinsList = new ArrayList<>();
-            // coinsList.add((long)2);
-            // coinsList.add((long)5);
-            // coinsList.add((long)3);
-            // coinsList.add((long)6);
-            // System.out.println(getWays(10, coinsList));
+        // longest common "substring" problem
+        System.out.println(substringDiff(2, "tabriz", "torino"));
 
-            // // longest common "substring" problem
-            // System.out.println(substringDiff(2, "tabriz", "torino"));
+        // unbounded knapsack
+        ArrayList<Integer> weights = new ArrayList<>();
+        weights.add(3);
+        weights.add(4);
+        weights.add(4);
+        weights.add(4);
+        weights.add(8);
+        System.out.println(unboundedKnapsack(9, weights));
 
-            // unbounded knapsack
-            ArrayList<Integer> weights = new ArrayList<>();
-            weights.add(3);
-            weights.add(4);
-            weights.add(4);
-            weights.add(4);
-            weights.add(8);
-            System.out.println(unboundedKnapsack(9, weights));
-
-        } catch (Exception e){
-            System.out.println("Hello?");
-        }
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,6 +171,10 @@ public class Solution {
      */
 
     public static int substringDiff(int k, String s1, String s2) {
+        // https://programs.programmingoneonone.com/2021/07/hackerrank-substrings-diff-problem-solution.html
+
+        // greedily finding the longest common substring and going from there does not work
+        
         return 0;
     }
 
