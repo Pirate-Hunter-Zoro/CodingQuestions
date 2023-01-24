@@ -172,10 +172,47 @@ public class Solution {
 
     public static int substringDiff(int k, String s1, String s2) {
         // https://programs.programmingoneonone.com/2021/07/hackerrank-substrings-diff-problem-solution.html
+        // TOO SLOW
 
         // greedily finding the longest common substring and going from there does not work
-        
-        return 0;
+        int maxLength = 0;
+
+        for (int i=0; i<s1.length(); i++){
+            for (int j=0; j<s2.length(); j++){
+                int mismatches = 0;
+                int length = 0;
+                for (int l=0; i+l<s1.length() && j+l<s2.length(); l++){
+                    if (s1.charAt(i+l) != s2.charAt(j+l)){
+                        // mismatch
+                        mismatches++;
+                    } 
+                    if (mismatches > k){
+                        break;
+                    } else {
+                        length++;
+                    }
+                }
+                if (mismatches < k) {
+                    // reached end of one string before hitting mismatch limit
+                    for (int l=1; i-l>=0 && j-l>=0; l++){
+                        // go back the other way
+                        if (s1.charAt(i-l) != s2.charAt(j-l)){
+                            // mismatch
+                            mismatches++;
+                        } 
+                        if (mismatches > k){
+                            break;
+                        } else {
+                            length++;
+                        }
+                    }
+                }
+                // now best possible length has been achieved
+                maxLength = Math.max(maxLength, length);
+            }
+        }
+        // return the record
+        return maxLength;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////
