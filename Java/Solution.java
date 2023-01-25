@@ -174,6 +174,9 @@ public class Solution {
         // https://programs.programmingoneonone.com/2021/07/hackerrank-substrings-diff-problem-solution.html
         // TOO SLOW
 
+        // https://www.hackerrank.com/amir_holtzman
+        // THIS person showed a fast enough algorithm
+
         // greedily finding the longest common substring and going from there does not work
         int maxLength = 0;
 
