@@ -6,25 +6,6 @@ public class Solution {
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws Exception {
-        // for Hackathon:
-        // String[] nm = reader.readLine()
-        //         .trim()
-        //         .split(" ");
-        // int n = Integer.parseInt(nm[0]);
-        // int m = Integer.parseInt(nm[1]);
-        // int[] coins = Arrays.stream(
-        //     reader.readLine()
-        //         .trim()
-        //         .split(" ")
-        //     )
-        //     .mapToInt(Integer::parseInt)
-        //     .toArray();
-
-        // System.out.printf(
-        //     "%d\n",
-        //     Solution.solve(n, m, coins)
-        // );
-
         // Coin change problem
         ArrayList<Long> coinsList = new ArrayList<>();
         coinsList.add((long)2);
@@ -229,7 +210,6 @@ public class Solution {
      * 1. INTEGER k
      * 2. INTEGER_ARRAY arr
      */
-
     public static int unboundedKnapsack(int k, List<Integer> arr) {
         // first convert to an array and sort it
         int[] objectWeights = arr.stream()
