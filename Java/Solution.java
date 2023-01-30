@@ -255,4 +255,107 @@ public class Solution {
     //////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /*
+     * Complete the 'legoBlocks' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     * 1. INTEGER n
+     * 2. INTEGER m
+     */
+    public static int legoBlocks(int n, int m) {
+        // Write your code here
+        long[][] wall = new long[n][m];
+        for (int h=n-1; h>=0; h--){
+            // width of 1
+            wall[h][0] = 1;
+        }
+        // now fill out the bottom row starting with some base cases
+        if (m > 1) // width 2
+            wall[n-1][1] = 2;
+        if (m > 2) // width 3
+            wall[n-1][2] = 4;
+        if (m > 3) // width 4
+            wall[n-1][3] = 8;
+        for (int w=4; w<m; w++){ // possibility of ending with a 1-block, 2-block, 3-block, or 4-block
+            wall[n-1][w] = wall[n-1][w-1] + wall[n-1][w-2] + wall[n-1][w-3] + wall[n-1][w-4];
+        }
+
+        // buildup all of width 2
+
+
+        // buildup all of width 3
+
+
+        // buildup all of width 4
+
+
+        // buildup rest
+        
+
+        return (int)(wall[0][m-1] % ((long)(Math.pow(10, 9) + 7)));
+
+    }
+
+    /**
+     * Given a set of intervals, find the size of its largest possible subset of
+     * intervals such that no three intervals in the subset share a common point.
+     * 
+     * @param intervals
+     * @return
+     */
+    public static int intervalSelection(List<List<Integer>> intervals) {
+        // Write your code here
+        int numIntervals = 0;
+
+        // sort by ending type first, starting type second
+        intervals.sort((intList1, intList2) -> {
+            int endDifference = intList1.get(intList1.size()-1) - intList2.get(intList2.size()-1);
+            if (endDifference != 0){
+                return endDifference;
+            } else {
+                int beginDistance = intList1.get(0) - intList2.get(0);
+                return beginDistance;
+            }
+        });
+
+        // remember the last two tasks, because we are allowed 2 conflicts at any arbitrary point in time
+        List<List<Integer>> lastTwoIntervals = new ArrayList<>();
+
+        List<Integer> interval1 = new ArrayList<>();
+        interval1.add(0);
+        interval1.add(0);
+        List<Integer> interval2 = new ArrayList<>();
+        interval2.add(0);
+        interval2.add(0);
+
+        lastTwoIntervals.add(interval1);
+        lastTwoIntervals.add(interval2);
+
+        // loop through each interval
+        for (List<Integer> interval : intervals){
+            if (interval.get(0) > lastTwoIntervals.get(1).get(1)){
+                // no conflict
+                numIntervals++;
+                lastTwoIntervals.set(1, interval);
+                // this later ending time interval for the second entry - this later ending time is what we need to replace to check for future conflicts
+            } else if (interval.get(0) > lastTwoIntervals.get(0).get(1)){
+                // one conflict - that's okay
+                // go ahead and add this interval in, because it doesn't make a difference WHAT intervals we add; only how many
+                numIntervals++;
+                lastTwoIntervals.set(0, lastTwoIntervals.get(1));
+                lastTwoIntervals.set(1, interval);
+                // We also need to update the FIRST remembered interval now that one conflict has happened.
+                // Proof:
+                // Take the time interval of overlap between the first and second intervals in lastTwoIntervals.
+                // Suppose some later event conflicts with the first time interval - it's starting time is less than or equal two the first interval's ending time.
+                // Then that event shares in the region of overlap between the first and second intervals in lastTwoIntervals, because it has at least as late of starting time as either.
+                // THAT right there is an interval with three events overlapping, which is not allwed
+            }
+        }
+
+        // return the value
+        return numIntervals;
+    }
+
 }
