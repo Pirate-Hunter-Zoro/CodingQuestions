@@ -3,28 +3,7 @@ import java.io.*;
 
 public class Solution {
 
-    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
     public static void main(String[] args) throws Exception {
-        // Coin change problem
-        ArrayList<Long> coinsList = new ArrayList<>();
-        coinsList.add((long)2);
-        coinsList.add((long)5);
-        coinsList.add((long)3);
-        coinsList.add((long)6);
-        System.out.println(getWays(10, coinsList));
-
-        // longest common "substring" problem
-        System.out.println(substringDiff(2, "tabriz", "torino"));
-
-        // unbounded knapsack
-        ArrayList<Integer> weights = new ArrayList<>();
-        weights.add(3);
-        weights.add(4);
-        weights.add(4);
-        weights.add(4);
-        weights.add(8);
-        System.out.println(unboundedKnapsack(9, weights));
 
     }
 
