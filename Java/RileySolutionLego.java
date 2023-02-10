@@ -27,11 +27,6 @@ public class RileySolutionLego {
             int n = split[0];
             int m = split[1];
 
-            if (n == 1) {
-                // we already have known solutions
-                System.out.printf("%d\n", mat[0][m]);
-                continue;
-            }
             // mat[1] is all combinations
             for (int nk = 1; nk <= n; nk++) {
                 for (int i=1; i<=m; i++) {
