@@ -23,7 +23,7 @@ private:
         for (int i=0; i<k; i++){
             if (i < k-1){
                 // not the last one
-                reversed_order.push(current);
+                reversed_order.push(currentNode);
                 currentNode = currentNode->next;
             } else{
                 // last one
@@ -97,14 +97,17 @@ public:
 
         // now that we have the length
         ListNode* toReturn = head;
+        ListNode* lastCurrent;
+        current = head;
         for (int i=0; i<length / k; i++){
             if (i==0) {
-                // keep track of the head to return
-                head = this->invert(current, k);
+                // keep track of the node to return
+                toReturn = this->invert(current, k);
             } else {
                 // just invert
-                this->invert(current, k);
+                lastCurrent->next = this->invert(current, k);
             }
+            lastCurrent = current;
             current = current->next;
         }
 
