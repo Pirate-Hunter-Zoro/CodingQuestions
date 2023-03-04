@@ -6,6 +6,8 @@
 #include<cmath>
 #include<unordered_set>
 #include<unordered_map>
+#include<vector>
+#include<stack>
 
 class Node {
 
