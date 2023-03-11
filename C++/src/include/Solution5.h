@@ -5,42 +5,55 @@
 #include <stdlib.h>
 #include <vector>
 
-class Solution
+class Solution5
 {
-public:
+private:
     std::vector<int> factorials;
+    std::vector<int> num_ones_given_free_digits;
+
+public:
+    Solution5(){
+        this->factorials.push_back(1);
+        this->num_ones_given_free_digits.push_back(0);
+    }
+
     int factorial(int n)
     {
-        if (factorials.size() - 1 >= n)
+        if (this->factorials.size() - 1 >= n)
         {
-            return factorials.at(n);
+            return this->factorials.at(n);
         }
         else
         {
-            factorials.push_back(factorial(n - 1) * n);
-            return factorials.at(n);
+            this->factorials.push_back(this->factorial(n - 1) * n);
+            return this->factorials.at(n);
         }
     }
 
     int choose(int n, int k)
     {
-        return (factorial(n) / ((factorial(k) * factorial(n - k))));
+        return (this->factorial(n) / ((this->factorial(k) * this->factorial(n - k))));
     }
 
-    std::vector<int> num_ones_given_free_digits;
+    /**
+     * @brief Given an integer n, count the total number of digit 1 appearing in all non-negative integers less than or equal to n.
+     *
+     * @param k
+     * @return int
+     */
     int numOnesGivenFreeDigits(int k)
     {
-        if (num_ones_given_free_digits.size() - 1 >= k)
+        if (this->num_ones_given_free_digits.size() - 1 >= k)
         {
-            return num_ones_given_free_digits.at(k);
+            return this->num_ones_given_free_digits.at(k);
         }
         // otherwise
         int num_ones = 0;
         for (int i = 1; i <= k; i++)
         {
-            num_ones += i * choose(k, i);
+            num_ones += i * this->choose(k, i);
         }
-        num_ones_given_free_digits.push_back(num_ones);
+        this->num_ones_given_free_digits.push_back(num_ones);
         return num_ones;
     }
 
@@ -54,7 +67,6 @@ public:
         int num_ones_lower_length = this->numOnesGivenFreeDigits(num_digits - 1);
 
         // now we need to consider this last digit
-        int num_current_ones = 0;
         int k = num_digits - 1;
         int current = n;
         for (int i = k; i > 0; i--)
@@ -62,7 +74,7 @@ public:
             current = current / 10;
         }
 
-        int num_ones = current * num_ones_lower_length + this->countDigitOne(n - current * ((int)pow(10, num_digits - 1)));
+        int num_ones = current * num_ones_lower_length + 1 + this->countDigitOne(n - current * ((int)pow(10, num_digits - 1)));
         return num_ones;
     }
 };
