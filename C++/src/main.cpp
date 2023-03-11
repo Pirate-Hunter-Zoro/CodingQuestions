@@ -4,6 +4,7 @@
 #include "include/Solution4.h"
 #include "include/Solution5.h"
 #include "include/Solution6.h"
+#include "include/Solution7.h"
 
 using namespace std;
 
