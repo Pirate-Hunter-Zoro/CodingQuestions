@@ -69,5 +69,6 @@
         "unordered_set": "cpp",
         "__tree": "cpp",
         "set": "cpp"
-    }
+    },
+    "diffEditor.codeLens": true
 }
