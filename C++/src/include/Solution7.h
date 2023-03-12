@@ -17,6 +17,35 @@ public:
      */
     std::string shortestPalindrome(std::string s)
     {
+        if (s.size() == 1 || this->isPalindrome(s)){
+            return s;
+        } else {
+            std::string pal_s = s;
+
+            while (!this->isPalindrome(pal_s)){
+                
+            }
+        }
+    }
+
+    /**
+     * @brief Helper method to determine if a string is a palindrome
+     * 
+     * @param s 
+     * @return true 
+     * @return false 
+     */
+    bool isPalindrome(const std::string &s){
+        if (s.size() == 1){
+            return true;
+        } else {
+            for (int i = 0; i<s.size()/2; i++){
+                if (s.at(i) != s.at(s.size()-1-i)){
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 };
 
