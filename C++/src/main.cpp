@@ -13,7 +13,5 @@ int main() {
     Solution5 sol = Solution5();
     cout << sol.countDigitOne(25) << endl;
 
-    
-
     return 0;
 }
